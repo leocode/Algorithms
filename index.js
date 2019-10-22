@@ -1,17 +1,29 @@
-const aloneAtParty = arr => {
-  const sortedArr = arr.sort((a,b) => a - b);
-  let response = `Everybody's got a pair.`
+const alarm = (time) => {
+  const convertHourToMinutes = (hours, minutes) => {
+    return (parseInt(hours) * 60 + parseInt(minutes));
+  }
 
-  sortedArr.map((item, index) => {
-    const prevItem = sortedArr[index - 1];
-    const nextItem = sortedArr[index + 1];
+  const MINUTES_IN_ONE_DAY = 1440
 
-    (item !== prevItem && item !== nextItem)
-      ? response = `The person alone is ${item} years old.`
-      : null
-  });
-  console.log(response);
-};
+  const [alarmHours, alarmMinutes] = time.split(':');
+  const currentDate = new Date();
+  const currentHour = currentDate.getHours();
+  const currentMinute = currentDate.getMinutes();
 
-const arr = [26,28,23,12,15,15,93,93,26,28,12,23];
-aloneAtParty(arr);
+  const currentTimeInMins = convertHourToMinutes(currentHour, currentMinute);
+  const alarmTimeInMins = convertHourToMinutes(alarmHours, alarmMinutes);
+  let result;
+
+  if(alarmTimeInMins < currentTimeInMins) {
+    result = MINUTES_IN_ONE_DAY - currentTimeInMins + alarmTimeInMins;
+  } else {
+    result = alarmTimeInMins - currentTimeInMins;
+  }
+
+  let answerHours = Math.floor(result/60)
+  let answerMinutes = result%60;
+
+  console.log(answerHours, answerMinutes);
+}
+
+alarm('23:30');
