@@ -10,10 +10,10 @@ def aloneAtParty(all_ages):
         if numOfCurrentAge == 0:
             results[age]=1
         else:
-            results[age]=results[age]+1
+            results[age]=0
 
     for age, num in results.items():
-        if num%2 != 0:
+        if num != 0:
             output.append(age)
 
     if len(output) == 0:
@@ -21,6 +21,7 @@ def aloneAtParty(all_ages):
     else:
         print(f"People alone ages: {','.join(output)}")
 
+    print(results)
 
-tab = input('Podaj wiek ludzi po kolei, oddzielajac go spacja. Np. 20 12 32 34 93 23\n')
+tab = input('Type people ages, divided by space. Example: 20 12 32 34 93 23\n')
 aloneAtParty(tab)
